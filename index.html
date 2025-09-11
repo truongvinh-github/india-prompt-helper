@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Midjourney Film Production Suite - Ancient India</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Prompt Helper</h1>
+            <p>Hỗ trợ tạo prompt phim Ấn Độ cổ đại</p>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <div class="project-style-section">
+                     <div class="category">
+                        <h3>🎨 PHONG CÁCH DỰ ÁN</h3>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Định hướng nghệ thuật:</label>
+                                <input type="text" id="artDirection" value="cinematic realism, ancient Bollywood epic style" readonly style="background-color: #eee; cursor: default;">
+                            </div>
+                            <div class="form-group"><label>Tâm trạng (Mood):</label><select id="mood"></select></div>
+                        </div>
+                        <div class="grid-2">
+                             <div class="form-group"><label>Hậu kỳ:</label><select id="postprocess"></select></div>
+                             <div class="form-group"><label>Seed (Để trống để random):</label><input type="number" id="seed" placeholder="e.g., 12345"></div>
+                        </div>
+                         <div class="form-group">
+                            <div class="weight-slider">
+                                <p class="instruction" style="margin-bottom: 10px;"><b>--stylize (Mức độ nghệ thuật):</b> Từ 0-1000, quyết định mức độ "sáng tạo nghệ thuật" của Midjourney. Giá trị thấp sẽ bám sát prompt, giá trị cao sẽ tự do sáng tạo hơn. Mặc định là 100.</p>
+                                <div>
+                                    <label>--s:</label>
+                                    <input type="range" id="stylize" min="0" max="1000" value="250">
+                                    <span id="stylizeValue">250</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h3>🖼️ ẢNH THAM CHIẾU (Character & Style)</h3>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Character Reference URL (--cref):</label>
+                            <input type="text" id="crefUrl" placeholder="URL ảnh nhân vật mẫu...">
+                            <div class="controls" style="margin-top:10px;">
+                                <button class="btn upload-btn" onclick="document.getElementById('crefFile').click()">⬆️ Upload</button>
+                                <button class="btn save-btn" onclick="saveReference('cref')">💾 Lưu</button>
+                            </div>
+                            <input type="file" id="crefFile" accept="image/*" class="hidden" onchange="uploadImage('cref')">
+                            <div class="weight-slider">
+                                <p class="instruction"><b>--cw (Character Weight):</b> Từ 0-100, quyết định mức độ ảnh hưởng của ảnh mẫu đến đặc điểm nhân vật (khuôn mặt, tóc, quần áo). Mặc định là 100.</p>
+                                <div>
+                                    <label>--cw:</label>
+                                    <input type="range" id="crefWeight" min="0" max="100" value="100">
+                                    <span id="crefWeightValue">100</span>
+                                </div>
+                            </div>
+                            <img id="crefThumbnail" class="thumbnail-preview" alt="Character Preview">
+                            <div id="crefStatus" class="status-message"></div>
+                            <div class="saved-thumbnails" id="savedCref"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Style Reference URL (--sref):</label>
+                            <input type="text" id="srefUrl" placeholder="URL ảnh phong cách mẫu...">
+                             <div class="controls" style="margin-top:10px;">
+                                <button class="btn upload-btn" onclick="document.getElementById('srefFile').click()">⬆️ Upload</button>
+                                <button class="btn save-btn" onclick="saveReference('sref')">💾 Lưu</button>
+                            </div>
+                            <input type="file" id="srefFile" accept="image/*" class="hidden" onchange="uploadImage('sref')">
+                             <div class="weight-slider">
+                                <p class="instruction"><b>--sw (Style Weight):</b> Từ 0-1000, quyết định mức độ ảnh hưởng của ảnh mẫu đến phong cách, màu sắc, và bố cục tổng thể. Mặc định là 100.</p>
+                                <div>
+                                    <label>--sw:</label>
+                                    <input type="range" id="srefWeight" min="0" max="1000" value="100">
+                                    <span id="srefWeightValue">100</span>
+                                </div>
+                            </div>
+                            <img id="srefThumbnail" class="thumbnail-preview" alt="Style Preview">
+                            <div id="srefStatus" class="status-message"></div>
+                            <div class="saved-thumbnails" id="savedSref"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category">
+                    <h3>🎬 CHI TIẾT CẢNH QUAY</h3>
+                     <div class="form-group">
+                        <label for="sceneDescriptionVietnamese">Mô tả cảnh (Tiếng Việt):</label>
+                        <p class="instruction">Nhập chủ đề chính của cảnh. VD: 'Đức Phật đắc đạo dưới cây bồ đề', 'Một nhà sư đi khất thực trong làng cổ'.</p>
+                        <input type="text" id="sceneDescriptionVietnamese" placeholder="VD: Một nhà sư đang ngồi thiền dưới gốc cây bồ đề">
+                        <input type="text" id="sceneDescriptionEnglish" readonly class="translation-result" placeholder="Bản dịch tiếng Anh sẽ xuất hiện ở đây...">
+                    </div>
+                    <div class="form-group">
+                        <label>Tỷ lệ khung hình:</label>
+                        <select id="aspectRatio">
+                            <option value="--ar 16:9" selected>16:9 (Cinematic)</option>
+                            <option value="--ar 2.39:1">2.39:1 (Anamorphic)</option>
+                            <option value="--ar 2:3">2:3 (Portrait)</option>
+                            <option value="--ar 1:1">1:1 (Square)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <h3>👤 DIỄN VIÊN & HÀNH ĐỘNG</h3>
+                    <div class="grid-3">
+                         <div class="form-group"><label>Vai trò:</label><select id="role"></select></div>
+                        <div class="form-group"><label>Giới tính:</label><select id="gender"></select></div>
+                        <div class="form-group"><label>Độ tuổi:</label><select id="age"></select></div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Cảm xúc (tiếng Việt):</label>
+                            <input type="text" id="emotionCustom" placeholder="Sẽ được tự động dịch..." class="custom-input">
+                            <input type="text" id="emotionCustomEnglish" readonly class="translation-result">
+                        </div>
+                        <div class="form-group">
+                            <label>Tư thế (tiếng Việt):</label>
+                            <input type="text" id="poseCustom" placeholder="Sẽ được tự động dịch..." class="custom-input">
+                            <input type="text" id="poseCustomEnglish" readonly class="translation-result">
+                        </div>
+                    </div>
+                     <div class="category" style="margin-top: 20px; box-shadow: none; padding: 0;">
+                        <h3>🎭 TRANG PHỤC & PHỤ KIỆN</h3>
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label>Trang phục (tiếng Việt):</label>
+                                <input type="text" id="wardrobeCustom" placeholder="Sẽ được tự động dịch..." class="custom-input">
+                                <input type="text" id="wardrobeCustomEnglish" readonly class="translation-result">
+                                <select id="wardrobe" style="margin-top: 8px;"></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Phụ kiện (tiếng Việt):</label>
+                                <input type="text" id="accessoriesCustom" placeholder="Sẽ được tự động dịch..." class="custom-input">
+                                <input type="text" id="accessoriesCustomEnglish" readonly class="translation-result">
+                                <select id="accessories" style="margin-top: 8px;"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <h3>🏞️ BỐI CẢNH & MÔI TRƯỜNG (Ấn Độ 2500 năm trước)</h3>
+                     <div class="form-group">
+                        <label>Bối cảnh (tiếng Việt):</label>
+                        <input type="text" id="backdropCustom" placeholder="Sẽ được tự động dịch..." class="custom-input">
+                        <input type="text" id="backdropCustomEnglish" readonly class="translation-result">
+                        <select id="backdrop" style="margin-top: 8px;"></select>
+                     </div>
+                </div>
+
+                <div class="category">
+                    <h3>🎥 CAMERA, BỐ CỤC & Ánh Sáng</h3>
+                    <div class="grid-3">
+                        <div class="form-group"><label>Ống kính:</label><select id="lens"></select></div>
+                        <div class="form-group"><label>Loại cú máy:</label><select id="shotType"></select></div>
+                        <div class="form-group"><label>Góc máy:</label><select id="angle"></select></div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group"><label>Bố cục:</label><select id="composition"></select></div>
+                        <div class="form-group"><label>Hướng sáng:</label><select id="lightDirection"></select></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h3>🎯 Generated Prompt</h3>
+                <div class="prompt-output" id="promptOutput">...</div>
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="generatePrompt()">🚀 Generate</button>
+                    <button class="btn btn-secondary" onclick="copyPrompt()">📋 Copy</button>
+                </div>
+                <div id="copyMessage" class="success-message hidden">✅ Prompt đã được copy!</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

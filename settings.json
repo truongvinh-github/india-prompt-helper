@@ -1,0 +1,92 @@
+{
+    "mood": [
+        { "value": "peaceful and serene", "text": "Bình yên, tĩnh lặng" },
+        { "value": "mystical and spiritual", "text": "Huyền bí, tâm linh" },
+        { "value": "majestic and epic", "text": "Hùng vĩ, sử thi" },
+        { "value": "tense and dramatic", "text": "Căng thẳng, kịch tính" }
+    ],
+    "postprocess": [
+        { "value": "cinematic color grading, warm tones", "text": "Chỉnh màu điện ảnh, tông ấm" },
+        { "value": "high dynamic range (HDR)", "text": "Dải tương phản động mở rộng (HDR)" },
+        { "value": "subtle film grain, vintage look", "text": "Phim cũ, vẻ cổ điển" }
+    ],
+    "role": [
+        { "value": "Buddhist monk", "text": "Thầy tu" },
+        { "value": "Royal prince", "text": "Hoàng tử" },
+        { "value": "Royal princess", "text": "Công chúa" },
+        { "value": "Farmer", "text": "Nông dân" },
+        { "value": "Merchant", "text": "Thương gia" },
+        { "value": "Warrior", "text": "Chiến binh" },
+        { "value": "Sage", "text": "Hiền triết" }
+    ],
+    "gender": [
+        { "value": "Indian male", "text": "Nam" },
+        { "value": "Indian female", "text": "Nữ" }
+    ],
+    "age": [
+        { "value": "child (5-12 years old)", "text": "Trẻ em (5-12)" },
+        { "value": "young adult (20-30 years old)", "text": "Thanh niên (20-30)" },
+        { "value": "middle-aged (40-50 years old)", "text": "Trung niên (40-50)" },
+        { "value": "elderly (60+ years old)", "text": "Người già (60+)" }
+    ],
+    "wardrobe": [
+        { "value": "", "text": "-- Lựa chọn --" },
+        { "value": "simple saffron monk robes", "text": "Áo cà sa cam" },
+        { "value": "plain white dhoti and bare chest", "text": "Khố trắng, ở trần" },
+        { "value": "elegant silk royal garments", "text": "Trang phục lụa hoàng gia" },
+        { "value": "simple cotton farmer's clothes", "text": "Quần áo nông dân" },
+        { "value": "leather and metal warrior armor", "text": "Giáp trụ chiến binh" }
+    ],
+    "accessories": [
+        { "value": "", "text": "-- Lựa chọn --" },
+        { "value": "a wooden alms bowl", "text": "Bát khất thực bằng gỗ" },
+        { "value": "no accessories", "text": "Không có" },
+        { "value": "a string of prayer beads", "text": "Chuỗi hạt cầu nguyện" },
+        { "value": "golden royal jewelry and a crown", "text": "Trang sức vàng và vương miện" },
+        { "value": "a simple farmer's tool", "text": "Dụng cụ nông nghiệp" },
+        { "value": "a sword and shield", "text": "Gươm và khiên" }
+    ],
+    "backdrop": [
+        { "value": "", "text": "-- Lựa chọn --" },
+        { "value": "in a tranquil ancient forest under a Banyan tree", "text": "Trong rừng cổ dưới cây đa" },
+        { "value": "inside a grand Mauryan royal palace hall", "text": "Trong đại sảnh cung điện Maurya" },
+        { "value": "at a bustling ancient marketplace with clay pots", "text": "Tại khu chợ cổ sầm uất" },
+        { "value": "in a humble village of mud-brick houses", "text": "Trong một ngôi làng mái đất" },
+        { "value": "at the stone steps (ghats) of the Ganges river", "text": "Bên bờ sông Hằng" },
+        { "value": "inside a serene Buddhist Vihara (monastery)", "text": "Trong một tu viện (Vihara) yên tĩnh" },
+        { "value": "in vast rice paddy fields at dawn", "text": "Trên cánh đồng lúa lúc bình minh" }
+    ],
+    "lens": [
+        { "value": "85mm f/1.4", "text": "85mm (Chân dung)" },
+        { "value": "50mm f/1.8", "text": "50mm (Tự nhiên)" },
+        { "value": "35mm f/2.8", "text": "35mm (Góc rộng)" },
+        { "value": "135mm f/2.0", "text": "135mm (Tele)" }
+    ],
+    "shotType": [
+        { "value": "medium shot", "text": "Trung cảnh" },
+        { "value": "close-up", "text": "Cận cảnh" },
+        { "value": "extreme close-up", "text": "Đặc tả" },
+        { "value": "full body shot", "text": "Toàn thân" },
+        { "value": "wide shot", "text": "Toàn cảnh" }
+    ],
+    "angle": [
+        { "value": "eye-level", "text": "Ngang tầm mắt" },
+        { "value": "low angle", "text": "Góc thấp" },
+        { "value": "high angle", "text": "Góc cao" },
+        { "value": "dutch angle", "text": "Góc nghiêng" }
+    ],
+    "composition": [
+        { "value": "rule of thirds composition", "text": "Quy tắc 1/3" },
+        { "value": "centered composition", "text": "Bố cục trung tâm" },
+        { "value": "leading lines composition", "text": "Đường dẫn" },
+        { "value": "framing within a frame composition", "text": "Khung trong khung" },
+        { "value": "symmetrical composition", "text": "Bố cục đối xứng" }
+    ],
+    "lightDirection": [
+        { "value": "soft side lighting", "text": "Ánh sáng bên (mềm)" },
+        { "value": "dramatic backlighting (rim light)", "text": "Ngược sáng (tách viền)" },
+        { "value": "classic Rembrandt lighting", "text": "Ánh sáng Rembrandt" },
+        { "value": "flat front lighting", "text": "Ánh sáng trực diện" },
+        { "value": "top-down lighting", "text": "Ánh sáng từ trên xuống" }
+    ]
+}
