@@ -110,9 +110,24 @@
                 <div class="category">
                     <h3>👤 DIỄN VIÊN & HÀNH ĐỘNG</h3>
                     <div class="grid-3">
-                         <div class="form-group"><label>Vai trò:</label><select id="role"></select></div>
-                        <div class="form-group"><label>Giới tính:</label><select id="gender"></select></div>
-                        <div class="form-group"><label>Độ tuổi:</label><select id="age"></select></div>
+                        <div class="form-group">
+                            <label>Vai trò (tiếng Việt):</label>
+                             <input type="text" id="roleCustom" placeholder="Nhập thủ công (sẽ tự dịch)..." class="custom-input">
+                            <input type="text" id="roleCustomEnglish" readonly class="translation-result">
+                            <select id="role" style="margin-top: 8px;"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính (tiếng Việt):</label>
+                            <input type="text" id="genderCustom" placeholder="Nhập thủ công (sẽ tự dịch)..." class="custom-input">
+                            <input type="text" id="genderCustomEnglish" readonly class="translation-result">
+                            <select id="gender" style="margin-top: 8px;"></select>
+                        </div>
+                        <div class="form-group">
+                             <label>Độ tuổi (tiếng Việt):</label>
+                             <input type="text" id="ageCustom" placeholder="Nhập thủ công (sẽ tự dịch)..." class="custom-input">
+                            <input type="text" id="ageCustomEnglish" readonly class="translation-result">
+                            <select id="age" style="margin-top: 8px;"></select>
+                        </div>
                     </div>
                     <div class="grid-2">
                         <div class="form-group">
