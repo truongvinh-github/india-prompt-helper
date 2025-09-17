@@ -35,6 +35,10 @@ function generatePrompt() {
     
     const englishDescription = v.sceneDescriptionEnglish || sceneVnInput.value.trim();
 
+    // Prioritize custom inputs, fall back to dropdowns
+    const finalRole = document.getElementById('roleCustomEnglish').value.trim() || v.role;
+    const finalGender = document.getElementById('genderCustomEnglish').value.trim() || v.gender;
+    const finalAge = document.getElementById('ageCustomEnglish').value.trim() || v.age;
     const finalEmotion = document.getElementById('emotionCustomEnglish').value.trim();
     const finalPose = document.getElementById('poseCustomEnglish').value.trim();
     const finalWardrobe = document.getElementById('wardrobeCustomEnglish').value.trim() || v.wardrobe;
@@ -42,7 +46,7 @@ function generatePrompt() {
     const finalBackdrop = document.getElementById('backdropCustomEnglish').value.trim() || v.backdrop;
 
     // 1. Core Scene
-    let prompt = `cinematic film still of ${englishDescription}, a ${v.age} ${v.gender} ${v.role}. `;
+    let prompt = `cinematic film still of ${englishDescription}, a ${finalAge} ${finalGender} ${finalRole}. `;
     
     if (finalPose) prompt += `The character is ${finalPose}`;
     if (finalEmotion) {
@@ -254,7 +258,10 @@ function setupEventListeners() {
         'poseCustom': 'poseCustomEnglish',
         'wardrobeCustom': 'wardrobeCustomEnglish', 
         'accessoriesCustom': 'accessoriesCustomEnglish',
-        'backdropCustom': 'backdropCustomEnglish'
+        'backdropCustom': 'backdropCustomEnglish',
+        'roleCustom': 'roleCustomEnglish',
+        'genderCustom': 'genderCustomEnglish',
+        'ageCustom': 'ageCustomEnglish'
     };
 
     for (const [viId, enId] of Object.entries(customTranslationFields)) {
