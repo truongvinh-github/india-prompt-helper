@@ -2,9 +2,10 @@ const IMGBB_API_KEY = '926c0c94357c2c2ec29ee002ff4a5a91';
 
 // --- DOM Elements ---
 const elements = {};
+// Removed 'role', 'gender', 'age' from this list as they are no longer dropdowns
 const elementIds = [
     'sceneDescriptionEnglish', 'aspectRatio', 'artDirection', 'mood', 'postprocess', 'seed',
-    'crefUrl', 'srefUrl', 'crefWeight', 'srefWeight', 'role', 'gender', 'age',
+    'crefUrl', 'srefUrl', 'crefWeight', 'srefWeight', 
     'wardrobe', 'accessories', 'backdrop', 'lens', 'shotType', 'angle',
     'composition', 'lightDirection',
     'stylize'
@@ -28,17 +29,26 @@ function getValues() {
 
 function generatePrompt() {
     const v = getValues();
-    if (!sceneVnInput.value.trim()) {
+    const sceneVnValue = sceneVnInput.value.trim();
+    const roleValue = document.getElementById('roleCustomEnglish').value.trim();
+    const genderValue = document.getElementById('genderCustomEnglish').value.trim();
+    const ageValue = document.getElementById('ageCustomEnglish').value.trim();
+    
+    if (!sceneVnValue) {
          document.getElementById('promptOutput').textContent = "Vui lòng nhập mô tả cảnh bằng Tiếng Việt...";
          return;
     };
+    if (!roleValue || !genderValue || !ageValue) {
+         document.getElementById('promptOutput').textContent = "Vui lòng nhập Vai trò, Giới tính, và Độ tuổi...";
+         return;
+    }
     
-    const englishDescription = v.sceneDescriptionEnglish || sceneVnInput.value.trim();
+    const englishDescription = v.sceneDescriptionEnglish || sceneVnValue;
 
-    // Prioritize custom inputs, fall back to dropdowns
-    const finalRole = document.getElementById('roleCustomEnglish').value.trim() || v.role;
-    const finalGender = document.getElementById('genderCustomEnglish').value.trim() || v.gender;
-    const finalAge = document.getElementById('ageCustomEnglish').value.trim() || v.age;
+    // Use values directly from the custom text inputs
+    const finalRole = roleValue;
+    const finalGender = genderValue;
+    const finalAge = ageValue;
     const finalEmotion = document.getElementById('emotionCustomEnglish').value.trim();
     const finalPose = document.getElementById('poseCustomEnglish').value.trim();
     const finalWardrobe = document.getElementById('wardrobeCustomEnglish').value.trim() || v.wardrobe;
@@ -282,7 +292,6 @@ function setupEventListeners() {
     }
 }
 
-// --- NEW --- Function to populate dropdowns from JSON
 function populateDropdown(selectId, options, isSelected) {
     const selectElement = document.getElementById(selectId);
     if (!selectElement) return;
@@ -292,7 +301,6 @@ function populateDropdown(selectId, options, isSelected) {
         const optionElement = document.createElement('option');
         optionElement.value = option.value;
         optionElement.textContent = option.text;
-        // Select the first item by default for most dropdowns
         if (isSelected && index === 0) {
             optionElement.selected = true;
         }
@@ -300,7 +308,6 @@ function populateDropdown(selectId, options, isSelected) {
     });
 }
 
-// --- NEW --- Main function to start the application
 async function initializeApp() {
     try {
         const response = await fetch('settings.json');
@@ -309,13 +316,9 @@ async function initializeApp() {
         }
         const config = await response.json();
 
-        // Populate all dropdowns
+        // Populate remaining dropdowns
         populateDropdown('mood', config.mood, true);
         populateDropdown('postprocess', config.postprocess, true);
-        populateDropdown('role', config.role, true);
-        populateDropdown('gender', config.gender, true);
-        populateDropdown('age', config.age, false); // select the 2nd one manually
-        document.getElementById('age').selectedIndex = 1;
         populateDropdown('wardrobe', config.wardrobe, false);
         populateDropdown('accessories', config.accessories, false);
         populateDropdown('backdrop', config.backdrop, false);
